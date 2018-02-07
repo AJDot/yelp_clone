@@ -37,6 +37,7 @@ gem 'haml-rails'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'pg', '0.21.0'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'pry'
