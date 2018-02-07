@@ -1,0 +1,8 @@
+%section.container
+  %h1.m-center Businesses
+  %ul
+    - @businesses.each do |business|
+      %li.card
+        %h2
+          = link_to business.name, business_path(business)
+        %p= business.description

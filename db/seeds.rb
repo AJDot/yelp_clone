@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+alpha = Fabricate(:business, name: 'alpha')
+beta = Fabricate(:business, name: 'beta')
+gamma = Fabricate(:business, name: 'gamma')
