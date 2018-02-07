@@ -1,0 +1,15 @@
+%section.container
+  %h1 Create a Business
+  .col-300
+    %form
+      %fieldset
+        %dl
+          %dt
+            %label(for="name")
+          %dd
+            %input(type="text" name="name" id="name" placeholder="Name")
+          %dt
+            %label(for="description")
+          %dd
+            %textarea(name="description" id="description" placeholder="Description")
+      %button.btn.btn-primary(type="submit") Create Business

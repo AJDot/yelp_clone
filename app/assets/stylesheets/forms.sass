@@ -1,0 +1,43 @@
+form
+  fieldset
+    padding: 0
+    margin: 0
+    border: none
+
+  dl, dt, dd
+    padding: 0
+    margin: 0
+
+  input, textarea
+    padding: 5px 9px
+    margin: 0 5px 10px
+    font: inherit
+    border: 1px solid $gray-t
+    border-radius: $border-radius
+    box-sizing: border-box
+
+  input[type="submit"]
+    cursor: pointer
+
+  dl
+    input, textarea
+      display: inline-block
+      width: calc(100% - 10px)
+
+    textarea
+      height: 100px
+      min-height: 35px
+      resize: vertical
+
+    &.partial
+      input
+        float: left
+        width: calc(50% - 10px)
+
+  label
+    display: none
+
+  button
+    display: block
+    width: calc(100% - 10px)
+    margin: 0 auto

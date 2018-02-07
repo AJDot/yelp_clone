@@ -1,0 +1,63 @@
+$gray-light: rgb(245, 245, 245)
+$gray-t: rgba(102, 102, 102, .5)
+$color-link: #0073bb
+$color-link-light: rgb(255, 255, 255)
+$color-primary: rgb(208, 46, 48)
+$color-primary-hover: rgb(237, 0, 8)
+
+$border-color-primary: rgb(141, 0, 5)
+$border-radius: 4px
+
+body
+  padding: 0
+  margin: 0
+  font: normal 14px/1.28571rem "Helvetica Neue", Helvetica, Arial, sans-serif
+  color: #333333
+
+a
+  color: $color-link
+  &:hover
+    text-decoration: underline
+
+  text-decoration: none
+h1, h2, h3, h4, h5, h6
+  margin: 0 0 .5rem 0
+
+h1, h2
+  color: $color-primary
+
+p
+  margin: 0 0 1rem 0
+
+ul, ol
+  padding: 0
+  margin: 0
+  list-style-type: none
+
+.band
+  padding: 20px
+  margin-bottom: 30px
+  background: $gray-light
+
+.left
+  float: left
+
+.right
+  float: right
+
+.m-center
+  margin-left: auto
+  margin-right: auto
+  text-align: center
+
+.clearfix:before,
+.clearfix:after
+  content: ""
+  display: block
+  clear: both
+
+.container
+  max-width: 960px
+  padding: 0 20px
+  margin: 0 auto
+  box-sizing: border-box

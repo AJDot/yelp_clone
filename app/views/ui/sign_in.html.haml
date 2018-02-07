@@ -1,0 +1,29 @@
+%section.container.m-center.row
+  .col-300.col-p
+    %h1.m-center Log In to Yelp (Clone)
+    %p.m-center
+      New to Yelp?
+      %a(href="#") Sign up
+    %p.m-center
+      %small
+        by logging in, you agree to Yelp Clone's
+        %a(href="#") Terms of Service
+        and
+        %a(href="#") Privacy Policy
+        \.
+    %form
+      %fieldset
+        %dl
+          %dt
+            %label(for="email") Email
+          %dd
+            %input(name="email" id="email" placeholder="Email")
+        %dl
+          %dt
+            %label(for="password") Password
+          %dd
+            %input(name="password" id="password" placeholder="Password")
+      %button.btn.btn-primary(type="submit") Log In
+
+  .col-500.col-p
+    = image_tag "signup_illustration.png"
