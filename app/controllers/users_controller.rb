@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = 'You are registered!'
+      flash[:success] = "You are registered! Welcome, #{@user.first_name}!"
       session[:user_id] = @user.id
       redirect_to businesses_path
     else

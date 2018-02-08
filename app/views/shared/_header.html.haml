@@ -2,7 +2,11 @@
   .left
     = link_to 'Yelp (Clone)', root_path, class: 'nav-brand'
   .right
-    = link_to 'Log In', login_path, class: 'nav-link'
-    = link_to 'Sign Up', register_path, class: 'nav-link btn btn-outline-white'
-    = form_tag logout_path, method: 'DELETE' do
-      %button.nav-link(type="submit") Logout
+    - if logged_in?
+      %p.nav-text
+        %small= "Logged in as #{current_user.first_name}"
+      = form_tag logout_path, method: 'DELETE' do
+        %button.nav-link(type="submit") Logout
+    - else
+      = link_to 'Log In', login_path, class: 'nav-link'
+      = link_to 'Sign Up', register_path, class: 'nav-link btn btn-outline-white'
