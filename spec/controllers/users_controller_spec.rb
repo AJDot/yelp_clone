@@ -35,6 +35,10 @@ describe UsersController do
         post :create, params: { user: user.attributes }
       end
 
+      it 'does not create a new user' do
+        expect(User.count).to eq(0)
+      end
+
       it 'sets @user to new User with params from form' do
         expect(assigns(:user)).to be_instance_of User
         expect(assigns(:user).first_name).to eq("")
