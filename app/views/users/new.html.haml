@@ -1,0 +1,34 @@
+%section.container.m-center.row
+  .col-300.col-p
+    %h1.m-center Sign Up for Yelp (Clone)
+    %p.m-center Connect with great local businesses
+    %p.m-center
+      %small
+        by signing up, you agree to Yelp Clone's
+        %a(href="#") Terms of Service
+        and
+        %a(href="#") Privacy Policy
+        \.
+    = form_for @user do |f|
+      %fieldset
+        %dl.partial
+          %dt
+            = f.label :first_name, 'Name'
+          %dd
+            = f.text_field :first_name, placeholder: 'First Name'
+            = f.text_field :last_name, placeholder: 'Last Name'
+        %dl
+          %dt
+            = f.label :email, 'Email'
+          %dd
+            = f.email_field :email, placeholder: "Email"
+        %dl
+          %dt
+            = f.label :password, 'Password'
+          %dd
+            = f.password_field :password, placeholder: 'Password'
+            = f.password_field :password_confirmation, placeholder: 'Confirm Password'
+      %button.btn.btn-primary(type="submit") Sign Up
+
+  .col-500.col-p
+    = image_tag "signup_illustration.png"
