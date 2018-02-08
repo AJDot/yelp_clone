@@ -3,4 +3,5 @@ Fabricator(:user) do
   last_name { Faker::Name.last_name }
   email { Faker::Internet.email }
   password { Faker::Lorem.characters(10) }
+  password_confirmation { |attrs| attrs[:password] }
 end

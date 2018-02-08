@@ -24,8 +24,14 @@ describe User do
     expect(User.count).to eq(1)
   end
 
-  it 'must have a password' do
+  it 'must have a password on create' do
     new_user = Fabricate.build(:user, password: nil)
+    new_user.save
+    expect(User.count).to eq(0)
+  end
+
+  it 'must have a password confirmation on create' do
+    new_user = Fabricate.build(:user, password: 'password', password_confirmation: '')
     new_user.save
     expect(User.count).to eq(0)
   end

@@ -15,6 +15,12 @@ form
     border: 1px solid $gray-t
     border-radius: $border-radius
     box-sizing: border-box
+    outline: none
+    &:focus
+      box-shadow: $box-shadow
+    &.error
+      border-color: $color-alert-danger-dark
+      box-shadow: $box-shadow-error
 
   input[type="submit"]
     cursor: pointer
@@ -36,6 +42,11 @@ form
 
   label
     display: none
+    &.error
+      display: block
+      color: $color-alert-danger-dark
+    .error
+      color: $color-alert-danger-dark
 
   button
     display: block

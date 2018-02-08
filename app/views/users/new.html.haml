@@ -9,14 +9,15 @@
         and
         %a(href="#") Privacy Policy
         \.
-    = form_for @user do |f|
+    = my_form_for @user do |f|
       %fieldset
         %dl.partial
           %dt
-            = f.label :first_name, 'Name'
+            = f.label :first_name, 'First Name'
+            = f.label :last_name, 'Last Name'
           %dd
             = f.text_field :first_name, placeholder: 'First Name'
-            = f.text_field :last_name, placeholder: 'Last Name'
+            = f.text_field :last_name, placeholder: 'Last Name', class: 'awesome'
         %dl
           %dt
             = f.label :email, 'Email'
@@ -27,6 +28,10 @@
             = f.label :password, 'Password'
           %dd
             = f.password_field :password, placeholder: 'Password'
+        %dl
+          %dt
+            = f.label :password_confirmation, 'Confirm Password'
+          %dd
             = f.password_field :password_confirmation, placeholder: 'Confirm Password'
       %button.btn.btn-primary(type="submit") Sign Up
 
