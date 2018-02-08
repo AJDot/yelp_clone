@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   resources :businesses, only: [:index, :show]
 
-  namespace :ui do
-    Dir.glob('app/views/ui/*.html.haml').sort.each do |file|
-      wireframe = File.basename(file, '.html.haml')
-      get wireframe unless wireframe == 'index' || wireframe.match(/^_/)
+  resources :ui, only: [:index] do
+    collection do
+      Dir.glob('app/views/ui/*.html.haml').sort.each do |file|
+        wireframe = File.basename(file, '.html.haml')
+        get wireframe unless wireframe == 'index' || wireframe.match(/^_/)
+      end
     end
   end
 end
