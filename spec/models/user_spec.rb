@@ -17,10 +17,16 @@ describe User do
     expect(User.count).to eq(0)
   end
 
+  it 'must have a unique email' do
+    alice = Fabricate(:user)
+    bob = Fabricate.build(:user, email: alice.email)
+    bob.save
+    expect(User.count).to eq(1)
+  end
+
   it 'must have a password' do
     new_user = Fabricate.build(:user, password: nil)
     new_user.save
     expect(User.count).to eq(0)
   end
-
 end
