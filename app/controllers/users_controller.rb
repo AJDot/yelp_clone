@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to businesses_path
     else
-      render :new, as: 'register'
+      render :new
     end
   end
 
