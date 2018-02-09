@@ -17,4 +17,11 @@ describe Business do
     Fabricate(:review, business: business)
     expect(Business.first.reviews.count).to eq(2)
   end
+
+  it 'has many reviews in descending order by created_at' do
+    business = Fabricate(:business)
+    review1 = Fabricate(:review, business: business, created_at: 1.day.ago)
+    review2 = Fabricate(:review, business: business)
+    expect(Business.first.reviews).to eq([review2, review1])
+  end
 end

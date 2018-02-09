@@ -42,4 +42,11 @@ describe User do
     Fabricate(:review, user: alice)
     expect(User.first.reviews.count).to eq(2)
   end
+
+  it 'has many reviews in descending order by created_at' do
+    user = Fabricate(:user)
+    review1 = Fabricate(:review, user: user, created_at: 1.day.ago)
+    review2 = Fabricate(:review, user: user)
+    expect(User.first.reviews).to eq([review2, review1])
+  end
 end

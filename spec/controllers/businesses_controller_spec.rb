@@ -14,4 +14,12 @@ describe BusinessesController do
       expect(assigns(:businesses)).to eq([business2, business1])
     end
   end
+
+  describe 'GET show' do
+    it 'sets @business' do
+      business = Fabricate(:business)
+      get :show, params: { id: business.id }
+      expect(assigns(:business)).to eq(business)
+    end
+  end
 end
