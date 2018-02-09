@@ -20,7 +20,8 @@
       .col-200
         %h3
           = link_to "#{review.user.first_name} #{review.user.last_name}", "#"
-        %p= review.created_at
+        %p
+          %small= date_from(review.created_at)
       .col-300
         %p= "#{review.rating} / 5 stars"
         %p= review.body
