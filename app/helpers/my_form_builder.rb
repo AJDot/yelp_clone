@@ -9,21 +9,6 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def text_field(method, options = {})
-    errors = object.errors[method.to_sym]
-    if !errors.empty?
-      new_options = { class: 'error' }
-      options = options.merge!(new_options) do |key, oldval, newval|
-        if oldval && key == :class
-          "#{oldval} #{newval}"
-        else
-          newval
-        end
-      end
-    end
-    super(method, options)
-  end
-
-  def text_field(method, options = {})
     add_error_class_to_options!(method, options, class: 'error')
     super(method, options)
   end
@@ -34,6 +19,11 @@ class MyFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def password_field(method, options = {})
+    add_error_class_to_options!(method, options, class: 'error')
+    super(method, options)
+  end
+
+  def select(method, options = {})
     add_error_class_to_options!(method, options, class: 'error')
     super(method, options)
   end

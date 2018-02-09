@@ -1,0 +1,15 @@
+%section.container
+  %h1 Write a Review
+  .col-300
+    = my_form_for [@business, @review] do |f|
+      %fieldset
+        %dl
+          %dt
+            = f.label :rating, 'Rating'
+          %dd
+            = f.select :rating, options_for_business_reviews
+          %dt
+            =f.label :body, 'Body'
+          %dd
+            =f.text_area :body, placeholder: 'Write a review', rows: 6
+      %button.btn.btn-primary(type="submit") Create Review

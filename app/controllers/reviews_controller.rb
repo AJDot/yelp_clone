@@ -8,9 +8,10 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @business = Business.find params[:business_id]
-    @user = User.find params[:user_id]
+    @user = current_user
     @review.business = @business
     @review.user = @user
+    binding.pry
     if @review.save
       flash[:success] = 'Review successfully created.'
       redirect_to business_path(@business)
