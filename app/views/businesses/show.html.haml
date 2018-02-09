@@ -15,24 +15,12 @@
 
 %section.container
   %h2 Reviews for Awesome Business
-  .list-stack.row.review
-    .col-200
-      %h3
-        %a(href="#") Reviewer's name
-    .col-300
-      %p 4 / 5 stars
-      %p This is my review of this awesome business. Awesome Business is an awesome business.
-  .list-stack.row.review
-    .col-200
-      %h3
-        %a(href="#") Reviewer's name
-    .col-300
-      %p 4 / 5 stars
-      %p This is my review of this awesome business. Awesome Business is an awesome business.
-  .list-stack.row.review
-    .col-200
-      %h3
-        %a(href="#") Reviewer's name
-    .col-300
-      %p 4 / 5 stars
-      %p This is my review of this awesome business. Awesome Business is an awesome business.
+  - @business.reviews.each do |review|
+    .list-stack.row.review
+      .col-200
+        %h3
+          = link_to "#{review.user.first_name} #{review.user.last_name}", "#"
+        %p= review.created_at
+      .col-300
+        %p= "#{review.rating} / 5 stars"
+        %p= review.body
