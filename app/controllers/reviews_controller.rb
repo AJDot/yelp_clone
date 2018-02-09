@@ -1,4 +1,6 @@
 class ReviewsController < ApplicationController
+  before_action :require_user
+
   def new
     @user = current_user
     @business = Business.find params[:business_id]

@@ -12,6 +12,13 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def require_user
+    return if logged_in?
+
+    flash[:danger] = 'You must be logged in to do that.'
+    redirect_to login_path
+  end
+
   def date_from(datetime)
     datetime.strftime('%b %e, %Y')
   end

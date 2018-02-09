@@ -8,10 +8,11 @@
           %small (87 reviews)
         %p= @business.description
       .col-300
-      .col-300
-        = link_to new_business_review_path(@business), class: 'btn btn-primary right' do
-          %i.fa.fa-star
-          Write a Review
+      - if logged_in?
+        .col-300
+          = link_to new_business_review_path(@business), class: 'btn btn-primary right' do
+            %i.fa.fa-star
+            Write a Review
 
 %section.container
   %h2 Reviews for Awesome Business
