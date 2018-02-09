@@ -1,4 +1,25 @@
 describe ReviewsController do
+  describe 'GET new' do
+    let(:business) { Fabricate(:business) }
+
+    before do
+      set_current_user
+      get :new, params: { business_id: business.id }
+    end
+
+    it 'sets @user' do
+      expect(assigns(:user)).to eq(current_user)
+    end
+
+    it 'sets @business' do
+      expect(assigns(:business)).to eq(business)
+    end
+
+    it 'sets @review to a new review' do
+      expect(assigns(:review)).to be_a_new Review
+    end
+  end
+
   describe 'POST create' do
     context 'with valid inputs' do
       it 'creates a review' do
@@ -45,11 +66,11 @@ describe ReviewsController do
         expect(Review.count).to eq(0)
       end
 
-      it 'renders the business/show template' do
+      it 'renders the new template' do
         business = Fabricate(:business)
         alice = Fabricate(:user)
         post :create, params: { review: Fabricate.attributes_for(:review, body: ""), business_id: business.id, user_id: alice.id }
-        expect(response).to render_template 'businesses/show'
+        expect(response).to render_template :new
       end
 
       it 'sets @review' do
@@ -67,6 +88,14 @@ describe ReviewsController do
         review_params = Fabricate.attributes_for(:review, body: "")
         post :create, params: { review: review_params, business_id: business.id, user_id: alice.id }
         expect(assigns(:business)).to eq(business)
+      end
+
+      it 'sets @user' do
+        business = Fabricate(:business)
+        alice = Fabricate(:user)
+        review_params = Fabricate.attributes_for(:review, body: "")
+        post :create, params: { review: review_params, business_id: business.id, user_id: alice.id }
+        expect(assigns(:user)).to eq(alice)
       end
     end
   end

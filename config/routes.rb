@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create]
   resources :businesses, only: [:index, :show] do
-    resources :reviews, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
 
   resources :ui, only: [:index] do

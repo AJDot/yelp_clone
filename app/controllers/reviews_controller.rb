@@ -1,4 +1,10 @@
 class ReviewsController < ApplicationController
+  def new
+    @user = current_user
+    @business = Business.find params[:business_id]
+    @review = Review.new
+  end
+
   def create
     @review = Review.new(review_params)
     @business = Business.find params[:business_id]
@@ -9,7 +15,7 @@ class ReviewsController < ApplicationController
       flash[:success] = 'Review successfully created.'
       redirect_to business_path(@business)
     else
-      render 'businesses/show'
+      render :new
     end
   end
 
