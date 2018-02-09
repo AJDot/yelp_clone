@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
   before_action :require_user
 
   def new
-    @user = current_user
     @business = Business.find params[:business_id]
     @review = Review.new
   end
@@ -10,9 +9,8 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @business = Business.find params[:business_id]
-    @user = current_user
     @review.business = @business
-    @review.user = @user
+    @review.user = current_user
     if @review.save
       flash[:success] = 'Review successfully created.'
       redirect_to business_path(@business)

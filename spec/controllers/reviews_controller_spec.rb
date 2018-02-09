@@ -8,10 +8,6 @@ describe ReviewsController do
         get :new, params: { business_id: business.id }
       end
 
-      it 'sets @user' do
-        expect(assigns(:user)).to eq(current_user)
-      end
-
       it 'sets @business' do
         expect(assigns(:business)).to eq(business)
       end
@@ -80,10 +76,6 @@ describe ReviewsController do
 
         it 'sets @business' do
           expect(assigns(:business)).to eq(business)
-        end
-
-        it 'sets @user' do
-          expect(assigns(:user)).to eq(current_user)
         end
       end
     end
