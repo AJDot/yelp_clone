@@ -10,4 +10,11 @@ describe Business do
     new_user.save
     expect(Business.count).to eq(0)
   end
+
+  it 'has many reviews' do
+    business = Fabricate(:business)
+    Fabricate(:review, business: business)
+    Fabricate(:review, business: business)
+    expect(Business.first.reviews.count).to eq(2)
+  end
 end

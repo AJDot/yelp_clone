@@ -11,7 +11,6 @@ class ReviewsController < ApplicationController
     @user = current_user
     @review.business = @business
     @review.user = @user
-    binding.pry
     if @review.save
       flash[:success] = 'Review successfully created.'
       redirect_to business_path(@business)

@@ -35,4 +35,11 @@ describe User do
     new_user.save
     expect(User.count).to eq(0)
   end
+
+  it 'has many reviews' do
+    alice = Fabricate(:user)
+    Fabricate(:review, user: alice)
+    Fabricate(:review, user: alice)
+    expect(User.first.reviews.count).to eq(2)
+  end
 end
