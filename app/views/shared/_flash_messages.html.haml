@@ -1,5 +1,5 @@
-.container
-  - flash.each do |name, msg|
+- flash.each do |name, msg|
+  .container
     %div(class="alert alert-#{name}")
       - if msg.is_a? String
         %a.close(data-dismiss='alert') &#215;

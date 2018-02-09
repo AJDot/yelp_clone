@@ -1,0 +1,15 @@
+%section.container
+  %h1 Create a Business
+  .col-300
+    = my_form_for @business do |f|
+      %fieldset
+        %dl
+          %dt
+            = f.label :name, 'Name'
+          %dd
+            = f.text_field :name, placeholder: "Name"
+          %dt
+            = f.label :description, 'Description'
+          %dd
+            = f.text_area :description, placeholder: "Description"
+      %button.btn.btn-primary(type="submit") Create Business

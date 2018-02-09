@@ -1,6 +1,8 @@
 %section.container
+  - if logged_in?
+    = link_to 'Create a Business', new_business_path, class: 'btn btn-primary right'
   %h1.m-center Businesses
-  %ul
+  %ul.clearfix
     - @businesses.each do |business|
       %li.card
         %h2
