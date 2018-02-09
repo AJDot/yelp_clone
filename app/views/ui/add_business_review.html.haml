@@ -1,0 +1,20 @@
+%section.container
+  %h1 Write a Review
+  .col-300
+    %form
+      %fieldset
+        %dl
+          %dt
+            %label(for="rating")
+          %dd
+            %select(type="text" name="rating" id="rating")
+              %option 5 Stars
+              %option 4 Stars
+              %option 3 Stars
+              %option 2 Stars
+              %option 1 Star
+          %dt
+            %label(for="body")
+          %dd
+            %textarea(name="body" id="body" placeholder="Write a review")
+      %button.btn.btn-primary(type="submit") Create Review
