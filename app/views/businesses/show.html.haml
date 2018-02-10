@@ -4,8 +4,8 @@
       .col-300
         %h1= @business.name
         %p
-          3 / 5 Stars
-          %small (87 reviews)
+          = "#{Review.average_by_business(@business)} / 5 Stars"
+          %small= pluralize(@business.reviews.count, 'review')
         %p= @business.description
       .col-300
       - if logged_in?
