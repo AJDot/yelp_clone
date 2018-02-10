@@ -1,4 +1,4 @@
 Fabricator(:business) do
-  name { Faker::Lorem.words(2).join(" ") }
-  description { Faker::Lorem.paragraph(2) }
+  name { Faker::App.name }
+  description { Faker::Lorem.paragraphs(2).join(" ") }
 end

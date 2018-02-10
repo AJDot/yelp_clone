@@ -6,9 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-alice = Fabricate(:user, first_name: 'Alice', email: 'alice@example.com', password: 'password')
-bob = Fabricate(:user, first_name: 'Bob', email: 'bob@example.com', password: 'password')
+alex = Fabricate(:user, first_name: 'Alex', email: 'alex@example.com', password: 'password')
 
-alpha = Fabricate(:business, name: 'alpha')
-beta = Fabricate(:business, name: 'beta')
-gamma = Fabricate(:business, name: 'gamma')
+Fabricate.times(4, :user)
+
+Fabricate.times(20, :business)
+
+Fabricate.times(100, :review) do
+  user { User.all.sample }
+  business { Business.all.sample }
+  created_at { Faker::Date.between(5.years.ago, Date.today) }
+end
