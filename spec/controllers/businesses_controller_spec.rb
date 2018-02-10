@@ -22,14 +22,8 @@ describe BusinessesController do
       expect(assigns(:businesses)).to eq([alpha, beta, delta])
     end
 
-    it 'sets @pages to number needed to paginate through all businesses when business count is evenly divisble by per_page' do
-      Fabricate.times(6, :business)
-      get :index
-      expect(assigns(:pages)).to eq(2)
-    end
-
-    it 'sets @pages to number needed to paginate through all businesses when business count is not evenly divisble by per_page' do
-      Fabricate.times(4, :business)
+    it 'sets @pages to number needed to paginate through all businesses' do
+      Fabricate.times(5, :business)
       get :index
       expect(assigns(:pages)).to eq(2)
     end
@@ -45,10 +39,38 @@ describe BusinessesController do
   end
 
   describe 'GET show' do
+    let(:business) { Fabricate(:business) }
+
     it 'sets @business' do
-      business = Fabricate(:business)
       get :show, params: { id: business.id }
       expect(assigns(:business)).to eq(business)
+    end
+
+    it 'sets @reviews to 3 reviews if 3 or more exist for business' do
+      Fabricate.times(3, :review, business: business)
+      get :show, params: { id: business.id }
+      expect(assigns(:reviews).count).to eq(3)
+    end
+
+    it 'sets @reviews to all reviews if less than 2 exist for business' do
+      Fabricate.times(2, :review, business: business)
+      get :show, params: { id: business.id }
+      expect(assigns(:reviews).count).to eq(2)
+    end
+
+    it 'sets @reviews_pages to number needed to paginate through all business reviews' do
+      Fabricate.times(5, :review, business: business)
+      get :show, params: { id: business.id }
+      expect(assigns(:reviews_pages)).to eq(2)
+    end
+
+    it 'sets @reviews at correct offset' do
+      alpha = Fabricate(:review, business: business, created_at: 4.day.ago)
+      beta = Fabricate(:review, business: business, created_at: 3.day.ago)
+      gamma = Fabricate(:review, business: business, created_at: 2.day.ago)
+      delta = Fabricate(:review, business: business, created_at: 1.day.ago)
+      get :show, params: { id: business.id, offset: 3 }
+      expect(assigns(:reviews)).to eq([alpha])
     end
   end
 

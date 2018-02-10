@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find params[:id]
+    @reviews = @user.reviews.limit(Review::PER_PAGE).offset(params[:offset])
+    @reviews_pages = Review.page_count_by_user @user
   end
 
   def new

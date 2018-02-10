@@ -24,4 +24,20 @@ describe Business do
     review2 = Fabricate(:review, business: business)
     expect(Business.first.reviews).to eq([review2, review1])
   end
+
+  describe 'page_count' do
+    it 'returns 0 when no businesses exist' do
+      expect(Business.page_count).to eq(0)
+    end
+
+    it 'returns number of pages needed to paginate through all businesses when business count is evenly divisble by per_page' do
+      Fabricate.times(6, :business)
+      expect(Business.page_count).to eq(2)
+    end
+
+    it 'returns number of pages needed to paginate through all businesses when business count is not evenly divisble by per_page' do
+      Fabricate.times(4, :business)
+      expect(Business.page_count).to eq(2)
+    end
+  end
 end

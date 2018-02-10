@@ -7,7 +7,7 @@
 
 %section.container
   %h2= "#{@user.first_name}'s Reviews"
-  - @user.reviews.each do |review|
+  - @reviews.each do |review|
     .list-stack.row.review
       .col-200
         %h3
@@ -17,3 +17,4 @@
       .col-300
         %p= "#{review.rating} / 5 stars"
         %p= review.body
+  = render 'shared/pagination', page_count: @reviews_pages, per_page: Review::PER_PAGE, path: -> x { user_path(@user, x) }

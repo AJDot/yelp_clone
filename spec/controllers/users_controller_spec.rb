@@ -7,10 +7,38 @@ describe UsersController do
   end
 
   describe 'GET show' do
+    let(:user) { Fabricate(:user) }
+
     it 'sets @user' do
-      user = Fabricate(:user)
       get :show, params: { id: user.id }
       expect(assigns(:user)).to eq(user)
+    end
+
+    it 'sets @reviews to 3 reviews if 3 or more exist for user' do
+      Fabricate.times(3, :review, user: user)
+      get :show, params: { id: user.id }
+      expect(assigns(:reviews).count).to eq(3)
+    end
+
+    it 'sets @reviews to all reviews if less than 2 exist for user' do
+      Fabricate.times(2, :review, user: user)
+      get :show, params: { id: user.id }
+      expect(assigns(:reviews).count).to eq(2)
+    end
+
+    it 'sets @reviews_pages to number needed to paginate through all user reviews' do
+      Fabricate.times(5, :review, user: user)
+      get :show, params: { id: user.id }
+      expect(assigns(:reviews_pages)).to eq(2)
+    end
+
+    it 'sets @reviews at correct offset' do
+      alpha = Fabricate(:review, user: user, created_at: 4.day.ago)
+      beta = Fabricate(:review, user: user, created_at: 3.day.ago)
+      gamma = Fabricate(:review, user: user, created_at: 2.day.ago)
+      delta = Fabricate(:review, user: user, created_at: 1.day.ago)
+      get :show, params: { id: user.id, offset: 3 }
+      expect(assigns(:reviews)).to eq([alpha])
     end
   end
 

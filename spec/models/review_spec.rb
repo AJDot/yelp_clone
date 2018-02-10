@@ -47,4 +47,40 @@ describe Review do
       expect(average).to eq(0)
     end
   end
+
+  describe 'page_count_by_user' do
+    let(:user) { Fabricate(:user) }
+
+    it 'returns 0 when user has no reviews' do
+      expect(Review.page_count_by_user(user)).to eq(0)
+    end
+
+    it 'returns number of pages needed to paginate through all user reviews when review count is evenly divisble by per_page' do
+      Fabricate.times(6, :review, user: user)
+      expect(Review.page_count_by_user(user)).to eq(2)
+    end
+
+    it 'returns number of pages needed to paginate through all user reviews when business count is not evenly divisble by per_page' do
+      Fabricate.times(4, :review, user: user)
+      expect(Review.page_count_by_user(user)).to eq(2)
+    end
+  end
+
+  describe 'page_count_by_business' do
+    let(:business) { Fabricate(:business) }
+
+    it 'returns 0 when business has no reviews' do
+      expect(Review.page_count_by_business(business)).to eq(0)
+    end
+
+    it 'returns number of pages needed to paginate through all business reviews when review count is evenly divisble by per_page' do
+      Fabricate.times(6, :review, business: business)
+      expect(Review.page_count_by_business(business)).to eq(2)
+    end
+
+    it 'returns number of pages needed to paginate through all business reviews when business count is not evenly divisble by per_page' do
+      Fabricate.times(4, :review, business: business)
+      expect(Review.page_count_by_business(business)).to eq(2)
+    end
+  end
 end

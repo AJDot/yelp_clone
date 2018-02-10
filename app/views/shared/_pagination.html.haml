@@ -1,0 +1,9 @@
+- if page_count > 1
+  %ul.pagination.row
+    - page_count.times do |n|
+      - offset = n * per_page
+      %li
+        - if (offset.to_s == params[:offset]) || (params[:offset].nil? && n == 0)
+          %span= n + 1
+        - else
+          = link_to n + 1, path.call(offset: offset)
