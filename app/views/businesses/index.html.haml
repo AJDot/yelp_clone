@@ -7,4 +7,7 @@
       %li.card
         %h2
           = link_to business.name, business_path(business)
+        %p
+          = "#{Review.average_by_business(business)} / 5 Stars"
+          %small= pluralize(business.reviews.count, 'review')
         %p= business.description
