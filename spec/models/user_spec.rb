@@ -49,4 +49,11 @@ describe User do
     review2 = Fabricate(:review, user: user)
     expect(User.first.reviews).to eq([review2, review1])
   end
+
+  describe '#full_name' do
+    it "returns the user's first_name and last_name separated by a space" do
+      Fabricate(:user, first_name: 'Bob', last_name: 'Frederick')
+      expect(User.first.full_name).to eq('Bob Frederick')
+    end
+  end
 end

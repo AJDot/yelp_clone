@@ -1,6 +1,6 @@
 .band
   %section.container
-    %h1= "Profile: #{@user.first_name} #{@user.last_name}"
+    %h1= "Profile: #{@user.full_name}"
     %p
       %i.fas.fa-star
       = "#{@user.reviews.count} Reviews"
