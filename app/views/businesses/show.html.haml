@@ -15,7 +15,7 @@
             Write a Review
 
 %section.container
-  %h2 Reviews for Awesome Business
+  %h2= "Reviews for #{@business.name}"
   - @reviews.each do |review|
     .list-stack.row.review
       .col-200
