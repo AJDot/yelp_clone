@@ -1,7 +1,9 @@
 class BusinessesController < ApplicationController
   before_action :require_user, only: [:new, :create]
+
   def index
-    @businesses = Business.all.order('name ASC')
+    @businesses = Business.limit(Business::PER_PAGE).offset(params[:offset])
+    @pages = page_count
   end
 
   def show
@@ -26,5 +28,9 @@ class BusinessesController < ApplicationController
 
   def business_params
     params.require(:business).permit(:name, :description)
+  end
+
+  def page_count
+    (Business.count - 1) / Business::PER_PAGE + 1
   end
 end

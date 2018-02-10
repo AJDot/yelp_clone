@@ -1,16 +1,46 @@
 describe BusinessesController do
   describe 'GET index' do
-    let(:business1) { Fabricate(:business, name: 'alpha', created_at: 1.day.ago) }
-    let(:business2) { Fabricate(:business, name: 'beta') }
 
-    before { get :index }
-
-    it 'sets @businesses' do
-      expect(assigns(:businesses)).to match_array [business1, business2]
+    it 'sets @businesses to 3 businesses if 3 or more exist' do
+      Fabricate.times(3, :business)
+      get :index
+      expect(assigns(:businesses).count).to eq(3)
     end
 
-    it 'sets @businesses in alphabetical order' do
-      expect(assigns(:businesses)).to eq([business1, business2])
+    it 'sets @businesses to all business if less than 3 exist' do
+      Fabricate.times(2, :business)
+      get :index
+      expect(assigns(:businesses).count).to eq(2)
+    end
+
+    it 'sets @businesses in alphabetical ordered by name ascending' do
+      alpha = Fabricate(:business, name: 'alpha', created_at: 4.day.ago)
+      beta = Fabricate(:business, name: 'beta', created_at: 3.day.ago)
+      gamma = Fabricate(:business, name: 'gamma', created_at: 2.day.ago)
+      delta = Fabricate(:business, name: 'delta', created_at: 1.day.ago)
+      get :index
+      expect(assigns(:businesses)).to eq([alpha, beta, delta])
+    end
+
+    it 'sets @pages to number needed to paginate through all businesses when business count is evenly divisble by per_page' do
+      Fabricate.times(6, :business)
+      get :index
+      expect(assigns(:pages)).to eq(2)
+    end
+
+    it 'sets @pages to number needed to paginate through all businesses when business count is not evenly divisble by per_page' do
+      Fabricate.times(4, :business)
+      get :index
+      expect(assigns(:pages)).to eq(2)
+    end
+
+    it 'sets @businesses at correct offset' do
+      alpha = Fabricate(:business, name: 'alpha', created_at: 4.day.ago)
+      beta = Fabricate(:business, name: 'beta', created_at: 3.day.ago)
+      gamma = Fabricate(:business, name: 'gamma', created_at: 2.day.ago)
+      delta = Fabricate(:business, name: 'delta', created_at: 1.day.ago)
+      get :index, params: { offset: 3 }
+      expect(assigns(:businesses)).to eq([gamma])
     end
   end
 
