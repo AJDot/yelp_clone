@@ -5,6 +5,8 @@
     - if logged_in?
       %p.nav-text
         %small= "Logged in as #{current_user.first_name}"
+      %small
+        = link_to 'Profile', user_path(current_user), class: 'nav-link'
       = form_tag logout_path, method: 'DELETE' do
         %button.nav-link(type="submit") Logout
     - else

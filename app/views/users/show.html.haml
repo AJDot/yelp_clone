@@ -1,0 +1,19 @@
+.band
+  %section.container
+    %h1= "Profile: #{@user.first_name} #{@user.last_name}"
+    %p
+      %i.fas.fa-star
+      = "#{@user.reviews.count} Reviews"
+
+%section.container
+  %h2= "#{@user.first_name}'s Reviews"
+  - @user.reviews.each do |review|
+    .list-stack.row.review
+      .col-200
+        %h3
+          = link_to review.business.name, business_path(review.business)
+        %p
+          %small= date_from(review.created_at)
+      .col-300
+        %p= "#{review.rating} / 5 stars"
+        %p= review.body

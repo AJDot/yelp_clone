@@ -6,6 +6,14 @@ describe UsersController do
     end
   end
 
+  describe 'GET show' do
+    it 'sets @user' do
+      user = Fabricate(:user)
+      get :show, params: { id: user.id }
+      expect(assigns(:user)).to eq(user)
+    end
+  end
+
   describe 'POST create' do
     context 'with valid inputs' do
       before do
