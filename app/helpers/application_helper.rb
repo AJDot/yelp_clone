@@ -11,4 +11,8 @@ module ApplicationHelper
       selected
     )
   end
+
+  def date_from(datetime)
+    datetime.strftime('%b %e, %Y')
+  end
 end

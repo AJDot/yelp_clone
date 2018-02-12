@@ -5,6 +5,10 @@ describe BusinessesController do
       Fabricate.times(3, :business)
       get :index
       expect(assigns(:businesses).count).to eq(3)
+
+      Fabricate(:business)
+      get :index
+      expect(assigns(:businesses).count).to eq(3)
     end
 
     it 'sets @businesses to all business if less than 3 exist' do
@@ -50,9 +54,13 @@ describe BusinessesController do
       Fabricate.times(3, :review, business: business)
       get :show, params: { id: business.id }
       expect(assigns(:reviews).count).to eq(3)
+
+      Fabricate(:review, business: business)
+      get :show, params: { id: business.id }
+      expect(assigns(:reviews).count).to eq(3)
     end
 
-    it 'sets @reviews to all reviews if less than 2 exist for business' do
+    it 'sets @reviews to all reviews if less than 3 exist for business' do
       Fabricate.times(2, :review, business: business)
       get :show, params: { id: business.id }
       expect(assigns(:reviews).count).to eq(2)

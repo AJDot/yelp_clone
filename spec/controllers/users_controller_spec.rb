@@ -18,9 +18,13 @@ describe UsersController do
       Fabricate.times(3, :review, user: user)
       get :show, params: { id: user.id }
       expect(assigns(:reviews).count).to eq(3)
+
+      Fabricate(:review, user: user)
+      get :show, params: { id: user.id }
+      expect(assigns(:reviews).count).to eq(3)
     end
 
-    it 'sets @reviews to all reviews if less than 2 exist for user' do
+    it 'sets @reviews to all reviews if less than 3 exist for user' do
       Fabricate.times(2, :review, user: user)
       get :show, params: { id: user.id }
       expect(assigns(:reviews).count).to eq(2)
